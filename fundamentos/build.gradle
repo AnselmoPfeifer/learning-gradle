@@ -1,0 +1,64 @@
+group 'com.anselmopfeifer'
+version '1.0-SNAPSHOT'
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.1'
+  distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+//task em gradle
+task hello {
+        println "Hello"
+}
+
+class JavaGreeter {
+    public void sayHello() {
+        System.out.println("Hello Java!");
+    }
+}
+
+JavaGreeter greeter = new JavaGreeter()
+greeter.sayHello()
+
+def valorA = 6.5
+def valorB = 5
+
+println "Valor: ${valorA + valorB}"
+println valorA.class
+
+def oneArg(x) {
+    println "Chamou a função com 1 argumento = $x"
+    x
+}
+
+def twoArgs(x, y) {
+    println "Chamou a função com dois argumentos: $x e $y"
+    x + y
+}
+
+def noArgs() {
+    println "Chamou a função sem argumentos"
+}
+
+oneArg 500
+
+twoArgs 500, 300
+
+twoArgs oneArg(600), 200
+
+noArgs()
+
