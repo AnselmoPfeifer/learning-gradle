@@ -1,0 +1,53 @@
+group 'com.anselmopfeifer'
+version '1.0-SNAPSHOT'
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.1'
+  distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+/* 
+gradle dependencies
+gradle dependencies --configuration runtime
+gradle dependencyInsight --dependency commons-logging
+gradle dependencyInsight --dependency commons-logging
+*/
+
+dependencies {
+    compile 'commons-io:commons-io:2.4' 
+    compile fileTree(dir: 'libs', include: '*.jar') 
+    compile 'org.springframework:spring-core:4.1.1.RELEASE'
+    testCompile 'junit:junit:4.12'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'java'
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Version': '1.0' 
+    }
+}
+
+task execute(type: JavaExec) {
+    main = "com.anselmopfeifer.Pessoa"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task printDependencies << {
+    configurations.compile.each { println it.name }
+}

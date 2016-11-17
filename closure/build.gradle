@@ -1,0 +1,58 @@
+group 'com.anselmopfeifer'
+version '1.0-SNAPSHOT'
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.1'
+  distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+task groovy << {}
+
+def text = "Um valor qualquer para o texto"
+def myClosure = {
+    println "Hello, iniciando a closure"
+    println "O valor para o text eh: $text"
+}
+
+myClosure()
+def bar = myClosure
+def baz = bar
+baz()
+
+def myList = ["Gradle", "Groovy", "Java"]
+def printItem = {item -> println "Item da Lista: $item"}
+// Enquanto tiber item na lista faca a impresaao deles
+myList.each(printItem)
+//quantidade d eitens na lista
+println myList.size
+
+//Forma mais compacta para imprmir itens de uma lista
+myList.each{println "Item da lista: $it"}
+
+class GroovyGreeter {
+    String greeting = "Texto default na variavel greeting"
+    def printGreeting(){println "Greeting  = $greeting"}
+}
+
+def myGroovyGreeter = new GroovyGreeter()
+
+myGroovyGreeter.printGreeting()
+myGroovyGreeter.greeting = "Novo texto customizado na variavel greeting"
+myGroovyGreeter.printGreeting()
+
+def foo = "bar"
+println "$foo + foo = ${foo + "foo"}"

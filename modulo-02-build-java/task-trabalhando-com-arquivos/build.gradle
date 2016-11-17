@@ -1,0 +1,89 @@
+group 'com.anselmopfeifer'
+version '1.0-SNAPSHOT'
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.1'
+  distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+
+task copyTask(type: Copy)
+task copyImages(type: Copy) {
+    from 'images'
+    into 'build'
+}
+
+task copyJpegs(type: Copy) {
+    from 'images'
+    include '*.jpg'
+    into 'build'
+}
+
+task copyImageFolders(type: Copy) {
+    from('images') {
+        include '*.jpg'
+        into 'jpeg'
+    }
+
+    from('images') {
+        include '*.gif'
+        into 'gif'
+    }
+
+    into 'build'
+}
+task zipImages(type: Zip) {
+    baseName = 'images'
+    destinationDir = file('build')
+    from 'images'
+}
+
+task zipImageFolders(type: Zip) {
+    baseName = 'images'
+    destinationDir = file('build')
+
+    from('images') {
+        include '*.jpg'
+        into 'jpeg'
+    }
+
+    from('images') {
+        include '*.gif'
+        into 'gif'
+    }
+}
+
+task deleteBuild(type: Delete) {
+    delete 'build'
+}
+
+
+// manipulando arquivos com task
+task lista << {
+    File srcDir
+    //Criando uma lista de arquivos usando closure
+    collection = files { srcDir.listFiles() }
+
+    srcDir = file('images')
+    println "Conteudo de $srcDir.name"
+    collection.collect { relativePath(it) }.sort().each { println it }
+
+    srcDir = file('build')
+    println "Conteudo de $srcDir.name"
+    collection.collect { relativePath(it) }.sort().each { println it }
+
+}
