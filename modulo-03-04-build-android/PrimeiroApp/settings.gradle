@@ -1,1 +1,1 @@
-include ':app', ':novomodulo'
+include ':app', ':wizardJokes', ':manualJokes'
