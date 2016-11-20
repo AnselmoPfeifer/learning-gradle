@@ -1,7 +1,0 @@
-apply plugin: 'java'
-apply plugin: 'application'
-
-task solutionExecute(type: JavaExec) {
-    main = "com.udacity.gradle.JokeTeller"
-    classpath = sourceSets.main.runtimeClasspath
-}
