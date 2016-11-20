@@ -18,8 +18,7 @@
         android:id="@+id/handcraftedJokeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/wizardJokeTextView"
-        tools:text="Test??" />
+        android:layout_below="@id/wizardJokeTextView"/>
 
 
 </RelativeLayout>
