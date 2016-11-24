@@ -40,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void tellJoke(View view) {
-        Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Este foi meu primeiro App em android! Não eh para rir não.", Toast.LENGTH_SHORT).show();
     }
 
 
